@@ -68,6 +68,14 @@ class Pairs
       constraint { |both| both.include?(a) ? !both.include?(b) : true }
     end
 
+    def alone(a)
+      constraint { |both| both.include?(a) ? both == [a] : true }
+    end
+
+    def accompanied(a)
+      constraint { |both| both.include?(a) ? both.count == 2 : true }
+    end
+
     def method_missing(method_name, *args, &block)
       return super unless args.count == 1
 

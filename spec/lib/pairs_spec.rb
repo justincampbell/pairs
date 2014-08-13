@@ -122,4 +122,36 @@ describe Pairs do
       end
     end
   end
+
+  describe "#alone" do
+    context "with an odd number" do
+      let(:block) {
+        -> {
+          item "a"; item "b"; item "c"
+          alone "c"
+        }
+      }
+
+      generative do
+        it "keeps that item alone" do
+          expect(solution.last).to eq(["c"])
+        end
+      end
+    end
+  end
+
+  describe "#accompanied" do
+    let(:block) {
+      -> {
+        item "a"; item "b"; item "c"
+        accompanied "c"
+      }
+    }
+
+    generative do
+      it "ensures that item is accompanied" do
+        expect(solution.first).to include("c")
+      end
+    end
+  end
 end
