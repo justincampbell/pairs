@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.version       = "0.1.0"
   spec.authors       = ["Justin Campbell"]
   spec.email         = ["justin@justincampbell.me"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = "Constraint solver for pairs"
+  spec.description   = "Constraint solver for pairs"
   spec.homepage      = ""
   spec.license       = "MIT"
 
