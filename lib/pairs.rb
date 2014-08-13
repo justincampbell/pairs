@@ -1,4 +1,6 @@
 class Pairs
+  class NoSolutionError < StandardError; end
+
   attr_reader :max_attempts, :block
 
   def initialize(max_attempts: 1000, &block)
@@ -29,6 +31,8 @@ class Pairs
         }
       }
     end
+
+    raise NoSolutionError
   end
 
   def solution

@@ -61,6 +61,21 @@ describe Pairs do
     end
   end
 
+  context "with an unsolvable constraint" do
+    let(:block) {
+      -> {
+        n 1; n 2; n 3
+        constraint { |both| both.reduce(:+) == 100 }
+      }
+    }
+
+    generative do
+      it "raises a NoSolutionError" do
+        expect { solution }.to raise_error(Pairs::NoSolutionError)
+      end
+    end
+  end
+
   context "with predicate constraints" do
     let(:block) {
       -> {
