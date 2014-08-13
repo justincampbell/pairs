@@ -3,7 +3,7 @@ class Pairs
 
   attr_reader :max_attempts, :block
 
-  def initialize(max_attempts: 1000, &block)
+  def initialize(max_attempts: 10_000, &block)
     @max_attempts = max_attempts
     @block = block
   end
