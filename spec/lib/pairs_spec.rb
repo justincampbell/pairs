@@ -105,4 +105,19 @@ describe Pairs do
       end
     end
   end
+
+  describe "#separate" do
+    let(:block) {
+      -> {
+        item "a"; item "b"; item "c"; item "d"
+        separate "a", "b"
+      }
+    }
+
+    generative do
+      it "keeps those 2 items separate" do
+        expect(solution.any? { |both| both.sort == %w[a b] }).to_not eq(true)
+      end
+    end
+  end
 end
