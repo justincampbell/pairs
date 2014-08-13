@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe Pairs do
-  let(:pairs) { Pairs.new(&block) }
+  let(:pairs) { Pairs.new(max_attempts: max_attempts, &block) }
+  let(:max_attempts) { Pairs::MAX_ATTEMPTS }
   let(:block) { -> { } }
   let(:solution) { pairs.solution }
 
@@ -68,6 +69,7 @@ describe Pairs do
         constraint { |both| both.reduce(:+) == 100 }
       }
     }
+    let(:max_attempts) { 1 }
 
     generative do
       it "raises a NoSolutionError" do
