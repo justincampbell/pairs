@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["justin@justincampbell.me"]
   spec.summary       = "Constraint solver for pairs"
   spec.description   = "Constraint solver for pairs"
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/justincampbell/pairs"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
