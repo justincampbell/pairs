@@ -60,4 +60,19 @@ describe Pairs do
       end
     end
   end
+
+  context "with predicate constraints" do
+    let(:block) {
+      -> {
+        good "a"; good "b"; bad "c"; bad "d"
+        constraint { |a, b| !(bad?(a) && bad?(b)) }
+      }
+    }
+
+    generative do
+      it "returns a solution" do
+        expect(solution.size).to eq(2)
+      end
+    end
+  end
 end

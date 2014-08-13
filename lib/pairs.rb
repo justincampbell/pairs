@@ -16,10 +16,6 @@ class Pairs
       until all.empty?
         these = all.sample(2)
 
-        next unless clean_room.__constraints__.all? { |constraint|
-          constraint.call(these)
-        }
-
         result << these
 
         these.each do |item|
@@ -27,7 +23,11 @@ class Pairs
         end
       end
 
-      return result
+      return result if clean_room.__constraints__.all? { |constraint|
+        result.all? { |pair|
+          constraint.call(pair)
+        }
+      }
     end
   end
 
@@ -56,6 +56,13 @@ class Pairs
 
     def method_missing(method_name, *args, &block)
       return super unless args.count == 1
+
+      predicate_method_name = "#{method_name}?".intern
+      unless methods.include?(predicate_method_name)
+        define_singleton_method(predicate_method_name) do |item|
+          __items__[method_name].include?(item)
+        end
+      end
 
       __items__[method_name] ||= []
       __items__[method_name] << args.first
