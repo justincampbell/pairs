@@ -138,6 +138,25 @@ describe Pairs do
         end
       end
     end
+
+    context "with an even number" do
+      let(:block) {
+        -> {
+          item "a"; item "b"; item "c"; item "d"
+          alone "c"
+        }
+      }
+
+      generative do
+        it "keeps that item alone" do
+          expect(solution.any? { |item| item == "c" }).to eq(true)
+        end
+
+        it "forces the other item alone as well" do
+          expect(solution.count).to eq(3)
+        end
+      end
+    end
   end
 
   describe "#accompanied" do
