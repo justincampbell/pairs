@@ -90,4 +90,19 @@ describe Pairs do
       end
     end
   end
+
+  describe "#together" do
+    let(:block) {
+      -> {
+        item "a"; item "b"; item "c"; item "d"
+        together "a", "b"
+      }
+    }
+
+    generative do
+      it "keeps those 2 items together" do
+        expect(solution.any? { |both| both.sort == %w[a b] }).to eq(true)
+      end
+    end
+  end
 end
