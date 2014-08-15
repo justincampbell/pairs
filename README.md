@@ -1,29 +1,46 @@
 # Pairs
 
-TODO: Write a gem description
+Constraint solver for pairs
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'pairs'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install pairs
+```
+gem install pairs
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Running the following file:
 
-## Contributing
+```ruby
+require 'pairs'
 
-1. Fork it ( https://github.com/[my-github-username]/pairs/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+pairs = Pairs.new do
+  senior "Alice"
+  senior "Brad"
+  senior "Charles"
+  senior "Debbie"
+
+  junior "Edward"
+  junior "Felicia"
+  junior "Justin"
+
+  constraint { |a, b| !(junior?(a) && junior?(b)) }
+  together "Alice", "Edward"
+  separate "Brad", "Felicia"
+  alone "Justin"
+end
+
+pairs.solution.each do |pair|
+  puts pair.join(' & ')
+end
+```
+
+...could produce this output:
+
+```
+Felicia & Debbie
+Charles & Brad
+Edward & Alice
+Justin
+```
