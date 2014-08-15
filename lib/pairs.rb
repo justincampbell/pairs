@@ -1,3 +1,5 @@
+require 'pairs/random_result_set'
+
 class Pairs
   class NoSolutionError < StandardError; end
 
@@ -10,35 +12,27 @@ class Pairs
     @block = block
   end
 
+  def solution
+    @solution ||= solve!
+  end
+
   def solve!
     clean_room.instance_exec(&block)
 
     max_attempts.times do
-      all = clean_room.__items__.values.flatten
-      result = []
-
-      until all.empty?
-        these = all.sample(2)
-
-        result << these
-
-        these.each do |item|
-          all.delete item
-        end
-      end
-
-      return result if clean_room.__constraints__.all? { |constraint|
-        result.all? { |pair|
-          constraint.call(pair)
-        }
-      }
+      result = RandomResultSet.new(values)
+      return result.pairs if result.satisfies?(constraints)
     end
 
     raise NoSolutionError
   end
 
-  def solution
-    @solution ||= solve!
+  def constraints
+    @constraints ||= clean_room.__constraints__
+  end
+
+  def values
+    @values ||= clean_room.__items__.values.flatten
   end
 
   private
