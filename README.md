@@ -1,4 +1,5 @@
 # Pairs
+[![Gem Version](https://badge.fury.io/rb/pairs.png)](http://badge.fury.io/rb/pairs)
 [![Build Status](https://travis-ci.org/justincampbell/pairs.png?branch=master)](https://travis-ci.org/justincampbell/pairs)
 
 Constraint solver for pairs
