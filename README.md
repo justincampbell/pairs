@@ -1,4 +1,5 @@
 # Pairs
+[![Build Status](https://travis-ci.org/justincampbell/pairs.png?branch=master)](https://travis-ci.org/justincampbell/pairs)
 
 Constraint solver for pairs
 
